@@ -22,11 +22,14 @@ int decimalToBinary(int n);
 vector<int> sortByNoOf1Bits(vector<int>& arr);
 bool contain(vector<int> a, int i);
 int longestContinuousRunOf1s(int n);
+int hammingDistance(int x, int y);
+int numberOfBits(int n);
 
 int main() {
-	int a;
-	cin >> a;
-	cout << longestContinuousRunOf1s(a);
+	int a, b;
+	cout << numberOfBits(7) << endl;
+	cin >> a >> b;
+	cout << hammingDistance(a, b);
 
 	return 0;
 }
@@ -171,4 +174,27 @@ int longestContinuousRunOf1s(int n) {
 		count = 0;
 	}
 	return *max_element(c.begin(), c.end());
+}
+
+int hammingDistance(int x, int y) {
+	//Input: x = 1, 0001
+	//       y = 4, 0100    65
+	//Output: 2
+	int count = 0;
+	int numOfBits = x > y ? numberOfBits(x) : numberOfBits(y);
+	for (int i = 0; i < numOfBits; i++) {
+		if ((x & (1 << i)) ^ (y & (1 << i))) {
+			count++;
+		}
+	}
+	return count;
+}
+
+int numberOfBits(int n) {
+	int a = 0;
+	while (n > 0) {
+		n = n / 2;
+		a++;
+	}
+	return a;
 }
