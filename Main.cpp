@@ -30,8 +30,8 @@ pair<int, int> uniqueNumber2(vector<int> n);
 int uniqueNumber3(vector<int> n);
 
 int main() {
-	vector<int> a = { 1, 2, 4, 9, 2, 3, 9, 1, 4, 5 };
-	cout << uniqueNumber2(a).first << " " << uniqueNumber2(a).second;
+	vector<int> a = { 1, 3, 5, 34, 3, 1, 5, 5, 3, 1 };
+	cout << uniqueNumber3(a);
 
 	return 0;
 }
@@ -260,13 +260,23 @@ int uniqueNumber3(vector<int> n) {
 		001
 	*/
 	int ans = 0;
-	for (int i = 0; i < n.size(); i++) {
-		if (n[i] & (1 << i)) {
-
+	vector<int> temp;
+	// HARDCODED 3 *max_element(c.begin(), c.end())
+	for (int i = 0; i < numberOfBits(*max_element(n.begin(), n.end())); i++) {
+		int count = 0;
+		for (int j = 0; j < n.size(); j++) {
+			if (n[j] & (1 << i)) {
+				count++;
+			}
+		}
+		if ((count % 3) == 1) {
+			temp.push_back(i);
 		}
 	}
 
-
+	for (int i = 0; i < temp.size(); i++) {
+		ans += (1 << temp[i]);
+	}
 
 	return ans;
 }
