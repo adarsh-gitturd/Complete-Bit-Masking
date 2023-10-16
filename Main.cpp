@@ -25,11 +25,13 @@ int longestContinuousRunOf1s(int n);
 int hammingDistance(int x, int y);
 int numberOfBits(int n);
 
+int uniqueNumber1(vector<int> n);
+pair<int, int> uniqueNumber2(vector<int> n);
+int uniqueNumber3(vector<int> n);
+
 int main() {
-	int a, b;
-	cout << numberOfBits(7) << endl;
-	cin >> a >> b;
-	cout << hammingDistance(a, b);
+	vector<int> a = { 1, 2, 4, 9, 2, 3, 9, 1, 4, 5 };
+	cout << uniqueNumber2(a).first << " " << uniqueNumber2(a).second;
 
 	return 0;
 }
@@ -197,4 +199,74 @@ int numberOfBits(int n) {
 		a++;
 	}
 	return a;
+}
+
+int uniqueNumber1(vector<int> n) {
+	// given 2n+1 numbers, every number is repeated twice except one. find it.
+	// 1, 2, 4, 5, 2, 3, 5, 1, 4
+	int ans = 0;
+	for (int a : n) {
+		ans = ans ^ a;
+	}
+	return ans;
+}
+
+pair<int, int> uniqueNumber2(vector<int> n) {
+	// given 2n+2 numbers, every number is repeated twice except two. find them.
+	// 1, 2, 4, 9, 2, 3, 9, 1, 4, 5
+	// 3 - 011                    101>>
+	// 5 - 101 xor-> 110
+	//         mask->010
+	pair<int, int> ans;
+	int temp = 0;
+	for (int a : n) {
+		temp = temp ^ a;
+	}
+	int mask;
+	for (int i = 0; i < numberOfBits(temp); i++) {
+		if (i) {
+			mask = 1 << i;
+			break;
+		}
+	}
+	vector<int> half;
+	for (int a : n) {
+		if (a & mask) {
+			half.push_back(a);
+		}
+	}
+	int temp2=0;
+	for (int a : half) {
+		temp2 = temp2 ^ a;
+	}
+	ans.first = temp2;
+	ans.second = ans.first ^ temp;
+	return ans;
+}
+
+int uniqueNumber3(vector<int> n) {
+	//given 3n+1 numbers, every number is repeated thrice except one. find it.
+	// 1, 3, 5, 4, 3, 1, 5, 5, 3, 1
+	/*
+		001
+		011
+		101
+		100
+		011
+		001
+		101
+		101
+		011
+		001
+	*/
+	int ans = 0;
+	for (int i = 0; i < n.size(); i++) {
+		if (n[i] & (1 << i)) {
+
+		}
+	}
+
+
+
+	return ans;
 }
