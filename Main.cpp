@@ -19,6 +19,8 @@ vector<int> decodeXORed(vector<int> encoded, int first);
 int countSetBits(int& n);
 int decimalToBinary(int n);
 vector<int> sortByNoOf1Bits(vector<int>& arr);
+bool contain(vector<int> a, int i);
+
 
 int main() {
 	vector<int> a = { 0,1,2,3,4,5,6,7,8 };
@@ -128,12 +130,31 @@ vector<int> sortByNoOf1Bits(vector<int>& arr) {
 		for (int i = 0; i < arr.size(); i++) {
 			if (arr[j] & 1 << i) {
 				freq++;
+				//int a = 
 			}
 		}
 		freqMap[j] = freq;
+	}
+
+	for (int i = 0; i < freqMap.size(); i++) {
+		for (int j = 0; j < freqMap.size(); j++) {
+			if ((freqMap[i] == freqMap[j]) && !(contain(sorted, j))) {
+				unordered_map<int, int>::iterator it = freqMap.find(j);
+				sorted.push_back(it->first);
+			}
+		}
 	}
 	for (pair<int, int> a : freqMap) {
 		cout << a.first << "  " << a.second << endl;
 	}
 	return sorted;
+}
+
+bool contain(vector<int> a, int i) {
+	for (int aa : a) {
+		if (aa == i) {
+			return true;
+		}
+	}
+	return false;
 }
