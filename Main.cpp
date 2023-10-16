@@ -28,10 +28,12 @@ int numberOfBits(int n);
 int uniqueNumber1(vector<int> n);
 pair<int, int> uniqueNumber2(vector<int> n);
 int uniqueNumber3(vector<int> n);
+int matrixScore(vector<vector<int>> matrix);
 
 int main() {
-	vector<int> a = { 1, 3, 5, 34, 3, 1, 5, 5, 3, 1 };
-	cout << uniqueNumber3(a);
+	cout << matrixScore({ {0, 0, 1, 1},
+						{1, 0, 1, 0 },
+						{1, 1, 0, 0}});
 
 	return 0;
 }
@@ -280,3 +282,44 @@ int uniqueNumber3(vector<int> n) {
 
 	return ans;
 }
+
+int matrixScore(vector<vector<int>> matrix) {
+	/*
+	Input: grid = [[0,0,1,1],
+				   [1,0,1,0],
+				   [1,1,0,0]]
+	Output: 39
+	Explanation: 15 + 9 + 15 = 39
+	
+	*/
+	int ans = 0;
+	vector<int> possiblePermutations;
+	vector<int> rowInterpretation;
+	for (int i = 0; i < matrix.size(); i++) {
+		int val = 0;
+		for (int j = 0; j < matrix[i].size(); j++) {
+			val += matrix[i][j] * (1 << j);
+		}
+		//HARDCODED 15
+		rowInterpretation.push_back(15 - val);
+		possiblePermutations.push_back(val);
+	}
+	for (int i = 0; i < matrix[0].size(); i++) {
+		int yv = 0;
+		for (int j = 0; j < matrix.size(); j++) {
+			yv += matrix[j][i] * (1 << j);
+		}	
+		possiblePermutations.push_back((yv^((1<<3)-1)));
+	}
+
+	for (int a : possiblePermutations) {
+		cout << a << endl;
+	}
+	return ans;
+
+}
+
+
+
+
+
