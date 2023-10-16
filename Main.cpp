@@ -283,43 +283,26 @@ int uniqueNumber3(vector<int> n) {
 	return ans;
 }
 
-int matrixScore(vector<vector<int>> matrix) {
-	/*
-	Input: grid = [[0,0,1,1],
-				   [1,0,1,0],
-				   [1,1,0,0]]
-	Output: 39
-	Explanation: 15 + 9 + 15 = 39
-	
-	*/
-	int ans = 0;
-	vector<int> possiblePermutations;
-	vector<int> rowInterpretation;
-	for (int i = 0; i < matrix.size(); i++) {
-		int val = 0;
-		for (int j = 0; j < matrix[i].size(); j++) {
-			val += matrix[i][j] * (1 << j);
+int matrixScore(vector<vector<int>> grid) {
+	int n = grid.size(), m = grid[0].size();
+
+	for (int i = 0; i < n; i++) {
+		if (grid[i][0] == 0) {
+			for (int j = 0; j < m; j++) {
+				grid[i][j] ^= 1;
+			}
 		}
-		//HARDCODED 15
-		rowInterpretation.push_back(15 - val);
-		possiblePermutations.push_back(val);
-	}
-	for (int i = 0; i < matrix[0].size(); i++) {
-		int yv = 0;
-		for (int j = 0; j < matrix.size(); j++) {
-			yv += matrix[j][i] * (1 << j);
-		}	
-		possiblePermutations.push_back((yv^((1<<3)-1)));
 	}
 
-	for (int a : possiblePermutations) {
-		cout << a << endl;
+	int ans = (1 << (m - 1)) * n;
+
+	for (int j = 1; j < m; j++) {
+		int count = 0;
+		for (int i = 0; i < n; i++) {
+			count += grid[i][j];
+		}
+
+		ans += (1 << (m - j - 1)) * max(count, n - count);
 	}
 	return ans;
-
 }
-
-
-
-
-
