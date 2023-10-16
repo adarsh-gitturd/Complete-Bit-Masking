@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,14 +21,12 @@ int countSetBits(int& n);
 int decimalToBinary(int n);
 vector<int> sortByNoOf1Bits(vector<int>& arr);
 bool contain(vector<int> a, int i);
-
+int longestContinuousRunOf1s(int n);
 
 int main() {
-	vector<int> a = { 0,1,2,3,4,5,6,7,8 };
-	vector<int> ans = sortByNoOf1Bits(a);
-	for (int aa : ans) {
-		cout << aa << " ";
-	}
+	int a;
+	cin >> a;
+	cout << longestContinuousRunOf1s(a);
 
 	return 0;
 }
@@ -130,7 +129,6 @@ vector<int> sortByNoOf1Bits(vector<int>& arr) {
 		for (int i = 0; i < arr.size(); i++) {
 			if (arr[j] & 1 << i) {
 				freq++;
-				//int a = 
 			}
 		}
 		freqMap[j] = freq;
@@ -157,4 +155,20 @@ bool contain(vector<int> a, int i) {
 		}
 	}
 	return false;
+}
+
+int longestContinuousRunOf1s(int n) {
+	// 10011100 - 156
+	int count = 0;
+	vector<int> c;
+	for (int i = 0; i < 10; i++) {
+		if ((n & (1 << i)) && ((n&(1<<(i+1)))) || 
+			(n & (1 << i)) && !((n & (1 << (i + 1))))) {
+			count++;
+			continue;
+		}
+		c.push_back(count);
+		count = 0;
+	}
+	return *max_element(c.begin(), c.end());
 }
