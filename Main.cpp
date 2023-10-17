@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// helper functions
 string oddOrEven(int& n);
 int getIthBit(int& n, int i);
 void clearIthBit(int& n, int i);
@@ -14,17 +15,18 @@ void setIthBit(int& n, int i, int val);
 void clearLastIBits(int& n, int i);
 void clearRangeOfBits(int& n, int i, int j);
 void replaceBits(int& n, int num, int i, int j);
+int countSetBits(int& n);
+int decimalToBinary(int n);
+bool contain(vector<int> a, int i);
+int numberOfBits(int n);
+
+// challenges
 string powerOf2(int& n);
 string powerOf4(int& n);
 vector<int> decodeXORed(vector<int> encoded, int first);
-int countSetBits(int& n);
-int decimalToBinary(int n);
 vector<int> sortByNoOf1Bits(vector<int>& arr);
-bool contain(vector<int> a, int i);
 int longestContinuousRunOf1s(int n);
 int hammingDistance(int x, int y);
-int numberOfBits(int n);
-
 int uniqueNumber1(vector<int> n);
 pair<int, int> uniqueNumber2(vector<int> n);
 int uniqueNumber3(vector<int> n);
@@ -311,12 +313,6 @@ int matrixScore(vector<vector<int>> grid) {
 	return ans;
 }
 
-/*
-5 101
-7 111
-  110
-*/
-
 int rangeBitwiseAnd(int left, int right) {
 	/* Given two integers left and right that represent the range [left, right],
 	return the bitwise AND of all numbers in this range, inclusive. */
@@ -357,7 +353,7 @@ vector<int> decodeXORPermutation(vector<int> encoded) {
 	return original;
 }
 
-
+/*****************************************************/
 
 
 
