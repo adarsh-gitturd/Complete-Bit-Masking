@@ -29,11 +29,10 @@ int uniqueNumber1(vector<int> n);
 pair<int, int> uniqueNumber2(vector<int> n);
 int uniqueNumber3(vector<int> n);
 int matrixScore(vector<vector<int>> matrix);
+int rangeBitwiseAnd(int left, int right);
 
 int main() {
-	cout << matrixScore({ {0, 0, 1, 1},
-						{1, 0, 1, 0 },
-						{1, 1, 0, 0}});
+	cout << rangeBitwiseAnd(5, 7);
 
 	return 0;
 }
@@ -306,3 +305,29 @@ int matrixScore(vector<vector<int>> grid) {
 	}
 	return ans;
 }
+
+/*
+5 101
+7 111
+  110
+*/
+
+int rangeBitwiseAnd(int left, int right) {
+	/* Given two integers left and right that represent the range [left, right],
+	return the bitwise AND of all numbers in this range, inclusive. */
+	int ans;
+	for (int i = left; i <= right; i++) {
+		ans &= i;
+	}
+	return ans;
+}
+
+
+
+
+
+
+
+
+
+
