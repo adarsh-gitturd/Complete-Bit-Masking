@@ -31,9 +31,13 @@ int uniqueNumber3(vector<int> n);
 int matrixScore(vector<vector<int>> matrix);
 int rangeBitwiseAnd(int left, int right);
 int totalHammingDistance(vector<int> nums);
+vector<int> decodeXORPermutation(vector<int> encoded);
 
 int main() {
-	cout << totalHammingDistance({ 4, 14, 2 });
+	vector<int> a = decodeXORPermutation({ 3, 1 });
+	for (int aa : a) {
+		cout << aa << endl;
+	}
 
 	return 0;
 }
@@ -337,6 +341,21 @@ int totalHammingDistance(vector<int> nums) {
 	return ans;
 }
 
+vector<int> decodeXORPermutation(vector<int> encoded) {
+	/*There is an integer array perm that is a permutation of the first n positive integers, where n is always odd.
+	It was encoded into another integer array encoded of length n - 1, such that encoded[i] = perm[i] XOR perm[i + 1]. 
+	Given the encoded array, return the original array perm. */
+	vector<int> original;
+	//3 1
+	//1 2 3
+	original.push_back(1);
+	for (int i = 0; i < encoded.size(); i++) {
+		int temp;
+		temp = original[i] ^ encoded[i];
+		original.push_back(temp);
+	}
+	return original;
+}
 
 
 
