@@ -30,9 +30,10 @@ pair<int, int> uniqueNumber2(vector<int> n);
 int uniqueNumber3(vector<int> n);
 int matrixScore(vector<vector<int>> matrix);
 int rangeBitwiseAnd(int left, int right);
+int totalHammingDistance(vector<int> nums);
 
 int main() {
-	cout << rangeBitwiseAnd(5, 7);
+	cout << totalHammingDistance({ 4, 14, 2 });
 
 	return 0;
 }
@@ -322,6 +323,19 @@ int rangeBitwiseAnd(int left, int right) {
 	return ans;
 }
 
+int totalHammingDistance(vector<int> nums) {
+	/* The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+	   Given an integer array nums, return the sum of Hamming distances between all the pairs of the integers in nums. */
+	int ans = 0;
+	int totalNoOfPairs = (nums.size() * (nums.size() - 1)) / 2;
+	for (int i = 0; i < totalNoOfPairs; i++) {
+		for (int j = i + 1; j < totalNoOfPairs; j++) {
+			ans = ans + hammingDistance(nums[i], nums[j]);
+			//cout << ans << endl;
+		}
+	}
+	return ans;
+}
 
 
 
